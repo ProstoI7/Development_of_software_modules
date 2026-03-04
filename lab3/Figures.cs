@@ -9,8 +9,6 @@ namespace Lab3
         public Color Color { get; set; }
         public abstract UIElement CreateUIElement(double size = 50);
     }
-
-
     public class Circle : Figure
     {
         public override UIElement CreateUIElement(double size = 50)

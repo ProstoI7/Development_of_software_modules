@@ -5,6 +5,8 @@ namespace Lab3
 {
     public partial class MainWindow : Window
     {
+        private IFigureFactory currentFactory;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -16,34 +18,24 @@ namespace Lab3
 
             DrawingPanel.Children.Clear();
 
-            CircleCreator circleCreator;
-            SquareCreator squareCreator;
-            TriangleCreator triangleCreator;
-
             switch (selectedItem.Content.ToString())
             {
                 case "Красный":
-                    circleCreator = new RedCircleCreator();
-                    squareCreator = new RedSquareCreator();
-                    triangleCreator = new RedTriangleCreator();
+                    currentFactory = new RedFactory();
                     break;
                 case "Синий":
-                    circleCreator = new BlueCircleCreator();
-                    squareCreator = new BlueSquareCreator();
-                    triangleCreator = new BlueTriangleCreator();
+                    currentFactory = new BlueFactory();
                     break;
                 case "Зелёный":
-                    circleCreator = new GreenCircleCreator();
-                    squareCreator = new GreenSquareCreator();
-                    triangleCreator = new GreenTriangleCreator();
+                    currentFactory = new GreenFactory();
                     break;
                 default:
                     return;
             }
 
-            DrawingPanel.Children.Add(circleCreator.CreateCircle().CreateUIElement());
-            DrawingPanel.Children.Add(squareCreator.CreateSquare().CreateUIElement());
-            DrawingPanel.Children.Add(triangleCreator.CreateTriangle().CreateUIElement());
+            DrawingPanel.Children.Add(currentFactory.CreateCircle().CreateUIElement());
+            DrawingPanel.Children.Add(currentFactory.CreateSquare().CreateUIElement());
+            DrawingPanel.Children.Add(currentFactory.CreateTriangle().CreateUIElement());
         }
     }
 }

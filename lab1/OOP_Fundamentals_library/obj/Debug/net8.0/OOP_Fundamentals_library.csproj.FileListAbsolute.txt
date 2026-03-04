@@ -1,0 +1,12 @@
+C:\Users\lukan\Source\Repos\lab1\OOP_Fundamentals_library\bin\Debug\net8.0\OOP_Fundamentals_library.deps.json
+C:\Users\lukan\Source\Repos\lab1\OOP_Fundamentals_library\bin\Debug\net8.0\OOP_Fundamentals_library.dll
+C:\Users\lukan\Source\Repos\lab1\OOP_Fundamentals_library\bin\Debug\net8.0\OOP_Fundamentals_library.pdb
+C:\Users\lukan\Source\Repos\lab1\OOP_Fundamentals_library\obj\Debug\net8.0\OOP_Fundamentals_library.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lukan\Source\Repos\lab1\OOP_Fundamentals_library\obj\Debug\net8.0\OOP_Fundamentals_library.AssemblyInfoInputs.cache
+C:\Users\lukan\Source\Repos\lab1\OOP_Fundamentals_library\obj\Debug\net8.0\OOP_Fundamentals_library.AssemblyInfo.cs
+C:\Users\lukan\Source\Repos\lab1\OOP_Fundamentals_library\obj\Debug\net8.0\OOP_Fundamentals_library.csproj.CoreCompileInputs.cache
+C:\Users\lukan\Source\Repos\lab1\OOP_Fundamentals_library\obj\Debug\net8.0\OOP_Fundamentals_library.sourcelink.json
+C:\Users\lukan\Source\Repos\lab1\OOP_Fundamentals_library\obj\Debug\net8.0\OOP_Fundamentals_library.dll
+C:\Users\lukan\Source\Repos\lab1\OOP_Fundamentals_library\obj\Debug\net8.0\refint\OOP_Fundamentals_library.dll
+C:\Users\lukan\Source\Repos\lab1\OOP_Fundamentals_library\obj\Debug\net8.0\OOP_Fundamentals_library.pdb
+C:\Users\lukan\Source\Repos\lab1\OOP_Fundamentals_library\obj\Debug\net8.0\ref\OOP_Fundamentals_library.dll

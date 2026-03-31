@@ -6,15 +6,15 @@ namespace Lab3
     {
         public abstract Circle CreateCircle();
     }
-    public class RedCircleCreator : CircleCreator 
+    public class RedCircleCreator : CircleCreator
     {
         public override Circle CreateCircle() => new Circle { Color = Colors.Red };
     }
-    public class BlueCircleCreator : CircleCreator 
+    public class BlueCircleCreator : CircleCreator
     {
         public override Circle CreateCircle() => new Circle { Color = Colors.Blue };
     }
-    public class GreenCircleCreator : CircleCreator 
+    public class GreenCircleCreator : CircleCreator
     {
         public override Circle CreateCircle() => new Circle { Color = Colors.Green };
     }
@@ -23,7 +23,7 @@ namespace Lab3
     {
         public abstract Square CreateSquare();
     }
-    public class RedSquareCreator : SquareCreator 
+    public class RedSquareCreator : SquareCreator
     {
         public override Square CreateSquare() => new Square { Color = Colors.Red };
     }

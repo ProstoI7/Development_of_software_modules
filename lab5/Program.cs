@@ -7,45 +7,69 @@ namespace lab5
         static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            Console.WriteLine("1. СОЗДАНИЕ ИЕРАРХИИ (COMPOSITE)");
+            Console.WriteLine("ЭТАП 1. Паттерн «Компоновщик»\n");
 
-            FolderItem localDrive = new FolderItem("C:");
-            FolderItem myDocs = new FolderItem("MyDocuments");
-            FolderItem images = new FolderItem("Images");
+            FileItem file1 = new FileItem("document.txt", 1024);
+            FileItem file2 = new FileItem("photo.jpg", 5120);
+            FileItem file3 = new FileItem("video.mp4", 20480);
 
-            FileItem textDoc = new FileItem("report.docx", 1024);
-            FileItem photo1 = new FileItem("photo1.jpg", 2048);
-            FileItem photo2 = new FileItem("photo2.png", 4096);
+            FolderItem root = new FolderItem("Root");
+            FolderItem docs = new FolderItem("Docs");
+            FolderItem media = new FolderItem("Media");
 
-            images.Add(photo1);
-            images.Add(photo2);
-            myDocs.Add(textDoc);
-            myDocs.Add(images);
-            localDrive.Add(myDocs);
+            FolderItem albums = new FolderItem("Albums");
 
-            Console.WriteLine($"Общий размер диска C: {localDrive.GetSize()} байт");
-            Console.WriteLine($"Размер папки Images: {images.GetSize()} байт\n");
+            docs.Add(file1);
+            media.Add(file2);
+            media.Add(file3);
+            media.Add(albums);
+
+            root.Add(docs);
+            root.Add(media);
+
+            Console.WriteLine("РАЗМЕРЫ ЭЛЕМЕНТОВ ФАЙЛОВОЙ СИСТЕМЫ:");
+            Console.WriteLine("----------------------------------------");
+            Console.WriteLine($"Размер файла 'video.mp4': {file3.GetSize()} байт");
+            Console.WriteLine($"Размер папки 'Media': {media.GetSize()} байт");
+            Console.WriteLine($"Размер папки 'Docs': {docs.GetSize()} байт");
+            Console.WriteLine($"Размер КОРНЕВОЙ ПАПКИ: {root.GetSize()} байт\n");
 
 
-            // 2
-            Console.WriteLine("2. ПОДКЛЮЧЕНИЕ ЧЕРЕЗ АДАПТЕРЫ (ADAPTER)");
+            Console.WriteLine("\nЭТАП 2. Паттерн «Адаптер»\n");
 
-            IFileSystem localFS = new FileSystemAdapter(localDrive, "NTFS Локально");
+            IFileSystem localFS = new FileSystemAdapter(root, "Локальный Диск");
 
-            FolderItem cloudDrive = new FolderItem("GoogleDriveRoot");
-            IFileSystem cloudFS = new FileSystemAdapter(cloudDrive, "Google Drive API");
+            Console.WriteLine("1. Метод ListItems - содержимое папки 'Media':");
+            foreach (var item in localFS.ListItems("Media"))
+            {
+                Console.WriteLine($"     {item}");
+            }
+
+            Console.WriteLine("\n2. Метод ReadFile - чтение файла:");
+            byte[] fileData = localFS.ReadFile("video.mp4");
+
+            Console.WriteLine("\n3. Метод WriteFile - запись файла:");
+            localFS.WriteFile("newfile.txt", new byte[] { 1, 2, 3 });
+
+            Console.WriteLine("\n4. Метод DeleteItem - удаление элемента:");
+            localFS.DeleteItem("document.txt");
 
 
-            // 3
-            Console.WriteLine("3. ИСПОЛЬЗОВАНИЕ ФАСАДА (FACADE)");
+            Console.WriteLine("\n\nЭТАП 3. Паттерн «Фасад»\n");
 
-            SyncFacade cloudManager = new SyncFacade(localFS, cloudFS);
+            FolderItem cloudRoot = new FolderItem("CloudRoot");
+            IFileSystem cloudFS = new FileSystemAdapter(cloudRoot, "Облако");
 
-            cloudManager.SyncFolder("Images", "CloudImagesBackup");
+            SyncFacade facade = new SyncFacade(localFS, cloudFS);
 
-            cloudManager.Backup("MyDocuments", "CloudDocsBackup");
+            Console.WriteLine("ДЕМОНСТРАЦИЯ 1: Синхронизация папки 'Media' в облако");
+            facade.SyncFolder("Media", "CloudMedia");
+
+            Console.WriteLine("ДЕМОНСТРАЦИЯ 2: Резервное копирование папки 'Docs'");
+            facade.Backup("Docs", "CloudDocsBackup");
 
         }
     }
+
 }
 

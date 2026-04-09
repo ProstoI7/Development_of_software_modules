@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace lab7
 {
@@ -62,11 +63,14 @@ namespace lab7
 
         public class FileHandler : EventHandlerBase
         {
+            private readonly string _filePath = "log.txt";
+
             public FileHandler(IFormatStrategy strategy) : base(strategy) { }
 
             protected override void SendMessage(string message)
             {
-                Console.WriteLine($"[FileHandler] ЗАПИСЬ В ФАЙЛ 'log.txt': {message}");
+                File.AppendAllText(_filePath, message + Environment.NewLine);
+                Console.WriteLine($"[FileHandler] ЗАПИСЬ В ФАЙЛ '{_filePath}': {message}");
             }
 
             protected override void LogResult()
